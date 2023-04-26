@@ -11,19 +11,32 @@ pontos:
     .word -5
     .word -5
 .text
+# Dado um vetor com 4 pontos, retorna o mais a dreita e em caso de empate o mais acima
 main:
+    # Carrega o endereco do vetor de pontos
     lui s0, %hi(pontos)
     addi s0, s0, %lo(pontos)
 
+    # Inicializa o contador
     li t0, 4
 
+    # Carrega o primeiro ponto
     lw s1, s0, 0
     lw s2, s0, 4
+
+    # Atualiza aposicao
     addi t1, s0, 8
+
+# Verifica se o ponto atual e um melhor candidato
 for:
+    # Carrega as coordenadas
     lw t3, t1, 0
     lw t4, t1, 4
+
+    # Atualiza a posicao
     addi t1, t1, 8
+
+    # Verifica se o ponto atual e melhor que o melhor candidato
     blt s1, t3, menor
     blt t3, s1, maior
     blt s2, t4, menor
@@ -33,9 +46,11 @@ menor:
     mv s2, t4
 
 maior:
+    # Atualiza o contador e verifica a condicao de parada
     addi t0, t0, -1
     blt zero, t0, for
 
+    # Imprime as coordenadas do maior ponto
     bge s1, zero, print_x
     sub s1, zero, s1
     li a0, 45
