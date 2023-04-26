@@ -1,14 +1,10 @@
+# Le e imprime o numero lido do teclado (funciona para negativos, pois nao foi feito nenhuma operacao)
 main:
-    # Le um num do teclado
+    # Le um numero do teclado
     li t0, 4
     ecall
 
-    # Salva o num em s0
-    mv s0, a0
-
-    # Imprime o num em s0
-    mv a0, s0
+    # Imprime o numero lido
     li t0, 1
     ecall
-    
     ret

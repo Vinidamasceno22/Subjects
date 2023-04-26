@@ -1,21 +1,24 @@
+# Le um numero entre 0 e 15 e imprime seu correspondente em hexadecimal
 main:
+    # Inicializa constante
     li t1, 10
-    # Le um num do teclado
+
+    # Le um numero do teclado e guarda em a0
     li t0, 4
     ecall
-    mv s0, a0
 
-    # Verifica se o num e maior que 10
-    blt s0, t1, num
-    addi s0, s0, 7
+    # Verifica se o numero e menor que 10
+    blt a0, t1, num
+    
+    # Adiciona 7 a a0 para conseguir o codigo em ASCII do digito
+    addi a0, a0, 7
 
 num:
-    # tranforma num maior que 10 em hex
-    addi s0, s0, 48
+    # tranforma numeros maiores que 10 em hexadecimal
+    addi a0, a0, 48
 
 imprimir:
-    # Imprime em hex
-    mv a0, s0
+    # Imprime o numero em hexadecimal
     li t0, 2
     ecall
 
@@ -24,4 +27,8 @@ imprimir:
     li t0, 2
     ecall
 
+    # Quebra de linha
+    li a0, 10
+    li t0, 2
+    ecall
     ret
