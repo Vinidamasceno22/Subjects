@@ -7,7 +7,8 @@ main:
     sw ra, 0(sp)
 
     la a0, str
-    call gets
+    li a1, 20
+    call fgets
 
     mv a1, a0
     li a0, 4
@@ -20,13 +21,15 @@ main:
     lw ra, 0(sp)
     addi sp, sp, 4
     ret
-gets:
-    addi sp, sp, -8
+fgets:
+    addi sp, sp, -12
     sw s0, 0(sp)
     sw s1, 4(sp)
+    sw s2, 8(sp)
 
     mv s0, a0
-    li s1, 0
+    mv s1, a1
+    mv s2, a1
 
     li a0, 0x130
     ecall
@@ -39,18 +42,21 @@ while:
     blt zero, a0, ler
     j while
 ler:
+    beq s1, zero, fim
     sb a1, 0(s0)
     addi s0, s0, 1
-    addi s1, s1, 1
+    addi s1, s1, -1
     j while
 fim:
     li t0, 0
     sb t0, 0(s0)
-    sub a0, s0, t0
+    sub t0, s1, s2
+    add a0, s0, t0
     
-    sw s0, 0(sp)
-    sw s1, 4(sp)
-    addi sp, sp, 8
+    lw s0, 0(sp)
+    lw s1, 4(sp)
+    lw s2, 8(sp)
+    addi sp, sp, 12
 
     ret
 
