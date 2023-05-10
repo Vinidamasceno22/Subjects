@@ -17,6 +17,7 @@ main:
   la s0, str2
   li s1, 20
   li s3, 65
+# Guarda o caractere 'A' em 20 posições a partir de s0
 loop:
   sb s3, 0(s0)
   addi s0, s0, 1
@@ -49,4 +50,5 @@ loop:
 
   li a0, 10
   ecall          # Encerra o programa
+  
   ret

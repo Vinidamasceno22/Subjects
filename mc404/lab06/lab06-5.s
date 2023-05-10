@@ -5,14 +5,16 @@ operacao:
     .word 45
     .word 52
 .text
+# Recebe dois numeros e retorna sua soma
 soma:
-    # Retorna a soma dos dois parametros
     add a0, a0, a1
     ret
+
+# Recebe dois numeros e retorna a subtracao do primeiro pelo segundo
 subt:
-    # Retorna a subtracao dos dois parametros
     sub a0, a0, a1
     ret
+# Le dois numeros e uma operacao do teclado e imprime o resultado
 main:
     # Salva o valor dos registradores
     addi sp, sp, -16

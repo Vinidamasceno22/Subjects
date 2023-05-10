@@ -16,6 +16,7 @@ main:
     la s2, msg2
 imprime:
     beq  s1, zero, fimMain
+    # Imprime mensagem de continuação
     li   a0, 4
     mv   a1, s2
     ecall
@@ -30,6 +31,7 @@ imprime:
     j    imprime
 
 fimMain:
+    # Imprime mensagem de finalizção
     li   a0, 4
     la   a1, msg
     ecall

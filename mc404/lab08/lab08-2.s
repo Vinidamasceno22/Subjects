@@ -4,6 +4,7 @@
     str2: .string "String 2"
 
 .text
+# Verifica a função strcpy imprimindo duas strings após realizada uma copia
 main:
     addi sp, sp, -12
     sw ra, 0(sp)
@@ -37,12 +38,16 @@ main:
     lw s0, 4(sp)
     lw ra, 0(sp)
     addi sp, sp, 12
-    ret
 
+    # Encerra o programa
+    li a0, 10
+    ecall
+
+# Recebe dois endereços e retorna o primeiro endereço com os elementos do segundo endereço
 strcpy:
     mv t0, a0
     mv t1, a1
-
+# Guarda cada elemento de a1 em a0
 while:
     lbu t2, 0(t1)
     beq t2, zero, fim
@@ -51,6 +56,7 @@ while:
     addi t0, t0, 1
     j while 
 fim:
+    # Adiciona o \0
     sb zero, 1(t1)
     ret
 
